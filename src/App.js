@@ -1,19 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Navigation from './Navigation';
+import Landing from './Components/AuthFlow/Landing';
+import Register from './Components/AuthFlow/Register';
+import LogIn from './Components/AuthFlow/LogIn';
+import ForgotPass from './Components/AuthFlow/ForgotPass';
+import Home from './Components/AuthFlow/Home';
+import Account from './Components/AuthFlow/Account';
+import * as routes from './routes';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <Navigation />
+
+          <hr/>
+
+          <Route
+            exact path={routes.LANDING}
+            component={Landing}
+          />
+          <Route
+            exact path={routes.REGISTER}
+            component={Register}
+          />
+          <Route
+            exact path={routes.LOG_IN}
+            component={LogIn}
+          />
+          <Route
+            exact path={routes.PASSWORD_FORGET}
+            component={ForgotPass}
+          />
+          <Route
+            exact path={routes.HOME}
+            component={Home}
+          />
+          <Route
+            exact path={routes.ACCOUNT}
+            component={Account}
+          />
+        </div>
+      </Router>
     );
   }
 }
