@@ -1,0 +1,67 @@
+.ExDB {
+  float: inherit;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.exDisp {
+  float: inherit;
+  text-align: left;
+  margin-left: 20%;
+  width: 60%;
+
+}
+
+.table-ex, .th-ex, .td-ex {
+    border: 1px solid grey;
+}
+
+.tr-ex {
+  width: 100%;
+}
+
+.th-ex {
+  font-weight: normal;
+  padding: 0px 10px;
+}
+
+.alignTextRight {
+  white-space:nowrap;
+  text-align: right;
+}
+
+.block label { display: inline-block; width: 140px; text-align: right; }
+
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 40%;
+    margin: 5%;
+}
+
+.text-area {
+  width: 100%;
+  overflow: auto;
+  height: 7rem;
+}
+
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+  margin-left: 8px;
+}
+
+.a-ex {
+
+  margin-bottom: -5px;
+  color: blue !important;
+  cursor: pointer;
+
+}

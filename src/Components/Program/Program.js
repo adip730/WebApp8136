@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Settings extends Component {
+class Program extends Component {
   render() {
     return (
       <div>
-        <h1>Settings</h1>
+        <h1>Your Program</h1>
       </div>
     )
   }
 }
 
-export default Settings;
+export default Program;
