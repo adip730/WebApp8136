@@ -7,7 +7,6 @@ import LogIn from './Components/AuthFlow/LogIn';
 import LogOut from './Components/AuthFlow/LogOut';
 import ForgotPass from './Components/AuthFlow/ForgotPass';
 import Home from './Components/AuthFlow/Home';
-import Account from './Components/AuthFlow/Account';
 import RegTeamAth from './Components/AuthFlow/RegTeamAth';
 
 import ExerciseLibrary from './Components/Exercises/ExerciseLibrary'
@@ -31,8 +30,6 @@ import * as routes from './routes';
 import {auth} from './firebase/firebase';
 
 class App extends Component {
-
-
 
   render() {
       return (
@@ -84,10 +81,7 @@ class App extends Component {
             exact path={routes.LOG_IN} component={LogIn}
           />
           <Route
-            exact path={routes.PASSWORD_FORGET} component={ForgotPass}
-          />
-          <Route
-            exact path={routes.ACCOUNT} component={Account}
+            exact path={routes.FORGOT_PASS} component={ForgotPass}
           />
         </Switch>
       </div>

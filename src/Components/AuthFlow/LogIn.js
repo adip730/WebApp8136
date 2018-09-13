@@ -81,6 +81,7 @@ class LogIn extends Component {
 
           { error && <p>{error.message}</p> }
         </form>
+        <li><Link to={routes.FORGOT_PASS}>Forgot your Password? Click here to recover it</Link></li>
         <li><Link to={routes.REGISTER}>Don't have an account? Click here to Register</Link></li>
       </div>
 
