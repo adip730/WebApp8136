@@ -12,6 +12,8 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
+import LogOut from './AuthFlow/LogOut';
+
 class MenuBar extends Component {
     constructor(props) {
       super(props);
@@ -78,7 +80,8 @@ class MenuBar extends Component {
                       <NavLink href="/Settings/">Settings</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/LogOut/">Log Out</NavLink>
+                      <LogOut />
+
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
