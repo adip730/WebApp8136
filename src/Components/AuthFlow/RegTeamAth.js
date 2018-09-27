@@ -22,8 +22,6 @@ class RegTeamAth extends Component {
       passwordOne: '',
       passwordTwo: '',
       teamCode: '',
-      school: '',
-      sport: '',
       error: null,
     };
   }
@@ -41,6 +39,10 @@ class RegTeamAth extends Component {
           email: email,
           school: doc.data().school,
           sport: doc.data().sport,
+          level: '0',
+          seasonD: doc.data().seasonD,
+          seasonM: doc.data().seasonM,
+          seasonY: doc.data().seasonY,
         }
         console.log(newUser);
         db.collection('users').doc(id).set(newUser);
@@ -79,8 +81,6 @@ class RegTeamAth extends Component {
               passwordOne: '',
               passwordTwo: '',
               teamCode: '',
-              school: '',
-              sport: '',
               error: null,
             });
             history.push(routes.HOME);

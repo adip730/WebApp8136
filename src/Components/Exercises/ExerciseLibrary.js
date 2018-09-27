@@ -12,8 +12,6 @@ class ExerciseLibrary extends Component {
     this.state = {
       exercises: [],
       searchVal: "",
-      showAddModal: false,
-      showEditModal: false,
       currentExercise: {},
     }
 
