@@ -78,6 +78,9 @@ class App extends Component {
             exact path={routes.REGTEAMATH} component={RegTeamAth}
           />
           <Route
+            exact path={routes.REGINDATH} component={RegIndAth}
+          />
+          <Route
             exact path={routes.LOG_IN} component={LogIn}
           />
           <Route

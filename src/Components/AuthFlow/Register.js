@@ -8,7 +8,7 @@ class Register extends Component {
       <div>
         <h1>Register</h1>
         <li><Link to={routes.REGTEAMATH}>Team Athlete Registration</Link></li>
-        <li><Link to={routes.REGISTER}>Individual Athlete Registration</Link></li>
+        <li><Link to={routes.REGINDATH}>Individual Athlete Registration</Link></li>
         <li><Link to={routes.REGISTER}>Coaches Registration</Link></li>
 
       </div>
