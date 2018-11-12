@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import * as routes from './../../routes';
 import {auth, db} from './../../firebase/firebase';
 
+import setUpSession from './../../setUpSession';
+
 
 
 const byPropKey = (propertyName, value) => () => ({
@@ -51,8 +53,7 @@ class RegTeamAth extends Component {
         }
         db.collection('users').doc(id).set(newUser)
         .then(() => {
-          this.setUpSession();
-          console.log('check');
+          console.log('check')
         });
       })
     });
@@ -72,8 +73,7 @@ class RegTeamAth extends Component {
 
     const teamRef = db.collection('teams').doc(teamCode);
     teamRef.get().then((doc) => {
-      if (doc.exists) {
-
+        if (doc.exists) {
         auth.createUserWithEmailAndPassword(email, passwordOne)
           .then(authUser => {
             this.createActDB(username, email, teamCode, authUser.user.uid);
@@ -91,13 +91,15 @@ class RegTeamAth extends Component {
           })
           .catch(error => {
             this.setState(byPropKey('error', error));
+          }).then(() => {
+            //history.push(routes.HOME);
           });
 
-    } else {
-        //make notification to enter valid team code
-    }}).catch(function(error) {
-        console.log("Invalid team code", error);
-    });
+      } else {
+          //make notification to enter valid team code
+      }}).catch(function(error) {
+          console.log("Invalid team code", error);
+      });
 
     e.preventDefault();
   }
@@ -123,7 +125,8 @@ class RegTeamAth extends Component {
         teamCode === '';
 
     return (
-      <div>
+      <div style={{display:'flex', flexDirection: 'column',
+        alignItems:'center', justifyContent:'center'}}>
         <h1>Team Athlete Registration</h1>
         <form onSubmit={this.onSubmit}>
           <input
@@ -162,7 +165,7 @@ class RegTeamAth extends Component {
 
           { error && <p>{error.message}</p> }
         </form>
-        <li><Link to={routes.LOG_IN}>Already have an account? Click here to Log In</Link></li>
+        <Link to={routes.LOG_IN}>Already have an account? Click here to Log In</Link>
       </div>
     )
   }

@@ -42,7 +42,7 @@ class RegIndAth extends Component {
         name: name,
         email: email,
         organization: 'None',
-        seasonStart: '',
+        seasonStart: 'n/a',
         sport: sport,
         level: level,
         program: prog,
@@ -50,16 +50,13 @@ class RegIndAth extends Component {
       }
       console.log(prog);
       db.collection('users').doc(id).set(newUser)
-      .then(
-
-      );
+      .then(() => {
+        console.log('check')
+      })
     });
   };
 
 
-
-
-  }
 
   onSubmit = (e) => {
     const {
@@ -91,12 +88,12 @@ class RegIndAth extends Component {
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
+      }).then(() => {
+        //history.push(routes.HOME);
       });
 
+      e.preventDefault();
   }
-
-
-
 
 
   render() {
@@ -119,7 +116,8 @@ class RegIndAth extends Component {
         level === '';
 
     return (
-      <div>
+      <div style={{display:'flex', flexDirection: 'column',
+        alignItems:'center', justifyContent:'center'}}>
         <h1>Individual Athlete Registration</h1>
         <form onSubmit={this.onSubmit}>
           <input
@@ -148,28 +146,28 @@ class RegIndAth extends Component {
           /><br/>
           <select
             value={sport}
-            onChange={e => this.setState(byPropKey('sport', e.target.value))}
+            onChange={e => this.setState(byPropKey('sport', e.target.value))}>
             <option value="Basketball">Basketball</option>
             <option value="Football">Football</option>
             <option value="Lacrosse">Lacrosse</option>
             <option value="Soccer">Soccer</option>
             <option value="Volleyball">Volleyball</option>
             <option value="Wrestling">Wrestling</option>
-          /><br/>
+          </select><br/>
           <select
             value={level}
-            onChange={e => this.setState(byPropKey('level', e.target.value))}
+            onChange={e => this.setState(byPropKey('level', e.target.value))} >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
-          /><br/>
+          </select><br/>
           <button disabled={isInvalid} type="submit">
             Register
           </button>
 
           { error && <p>{error.message}</p> }
         </form>
-        <li><Link to={routes.LOG_IN}>Already have an account? Click here to Log In</Link></li>
+        <Link to={routes.LOG_IN}>Already have an account? Click here to Log In</Link>
       </div>
     )
   }

@@ -4,8 +4,8 @@ import {auth,db} from './../../firebase/firebase';
 
 
 export default class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       authUser: null,
@@ -18,7 +18,7 @@ export default class Profile extends Component {
     };
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
 
      const user = auth.currentUser;
      this.setState({ authUser: user });
@@ -40,24 +40,53 @@ export default class Profile extends Component {
        });
      })
 
-  }
+  }*/
 
   render() {
     const user = auth.currentUser;
+    const {
+      name,
+      email,
+      organization,
+      seasonStart,
+      sport,
+      level,
+      prog,
+    } = this.props;
 
     return (
-      <div>
+      <div style={{display:'flex', flexDirection: 'column',
+        alignItems:'center', justifyContent:'center'}}>
         <div>
-          <h2>PROFILE</h2> <br/> <br/>
-          Name: {this.state.name} <br/>
+          <h2>PROFILE</h2> <br/>
+
+          <div>
+          Name: {this.props.name} <br/>
           Email: {user.email} <br/>
-          School: {this.state.school} <br/>
-          Sport: {this.state.sport} <br/>
-          Level: {this.state.level} <br/>
-          Your program: {this.state.prog} <br/>
+          Organization: {this.props.organization} <br/>
+         </div>
+        {this.props.seasonStart !== null &&
+          <div>
+            Season Start Date: {this.props.seasonStart} <br/>
+          </div>
+        }
+        <div>
+          Sport: {this.props.sport} <br/>
+          Level: {this.props.level} <br/>
+          Your program: {this.props.prog} <br/>
         </div>
+
+        </div>
+        <br/>
         <LogOut />
       </div>
     )
   }
 }
+
+
+/*Email: {user.email} <br/>
+School: {this.state.school} <br/>
+Sport: {this.state.sport} <br/>
+Level: {this.state.level} <br/>
+Your program: {this.state.prog} <br/>*/

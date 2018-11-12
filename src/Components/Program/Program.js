@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {auth,db} from './../../firebase/firebase';
-import ProgramDisplay from './ProgramDisplay';
+import Preview from './../Workout/Preview';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button, Modal } from 'reactstrap';
 
 class Program extends Component {
   constructor() {
      super();
 
      this.state = {
-       authUser: null,
+       showPrev: false,
+       wID: '',
+       /*authUser: null,
        prog: '',
        sport: '',
        level: '',
@@ -20,104 +24,23 @@ class Program extends Component {
        seasD: '',
        seasM: '',
        seasY: '',
-       weeksUntil: '',
+       weeksUntil: '',*/
      };
+     this.toggle = this.toggle.bind(this);
+  }
 
-   }
+ toggle() {
+    this.setState({
+      showPrev: !this.state.showPrev
+    });
+  }
 
-   getWeek() {
-     const progRef = db.collection('programs').doc(this.state.prog);
-     progRef.get().then((doc) => {
-       var i;
-       for (i = 0; i < 52; i++) {
-          var iterate = doc.data().weeks[i];
-          if(iterate.meso==="Daily Undulating") {
-            var index = i - parseInt(this.state.weeksUntil);
-            if (index < 0) {
-              index = index + 22;
-              this.setState({weekIndex: parseInt(index, 10)});
-              break;
-            }
-            else {
-              this.setState({weekIndex: parseInt(index, 10)});
-              break;
-            }
-            break;
-          }
-       }
-
-       const ind = this.state.weekIndex;
-       const thisW = doc.data().weeks[ind-1];
-       this.setState({meso: thisW.meso});
-       this.setState({week: thisW.week});
-       this.setState({thisWeek: thisW});
-       this.setState({days: thisW.days});
-       console.log(thisW);
+  setModalVisible(wID) {
+      this.setState({wID: wID}),
+      this.toggle();
+  }
 
 
-     })
-
-   }
-
-   makeDate() {
-     const date = new Date();
-     var dd = date.getDate();
-     var mm = date.getMonth()+1;
-     var yyyy = date.getFullYear();
-     if(dd < 10) { dd= '0' + dd };
-      if(mm < 10) { mm = '0' + mm };
-      const today = mm + '/' + dd + '/' + yyyy;
-
-      this.weeksTilSeason(dd,mm,yyyy);
-      this.setState({today:today});
-     }
-
-     weeksTilSeason(day,month,year) {
-        var td = parseInt(day, 10);
-        var sd = parseInt(this.state.seasD, 10);
-        var tm = parseInt(month, 10);
-        var sm = parseInt(this.state.seasM, 10);
-        var ty = parseInt(year, 10);
-        var sy = parseInt(this.state.seasY, 10);
-        if (sy > ty) {
-          sm = sm+12*(sy-ty);
-
-        }
-        var daysBetween = (sm-tm)*30 + (sd-td);
-        var weeksUntil = parseInt((daysBetween)/7);
-        console.log(weeksUntil);
-
-
-        this.setState({weeksUntil: weeksUntil});
-
-      }
-
-      componentDidMount() {
-
-       const user = auth.currentUser;
-       this.setState({ authUser: user });
-       const userRef = db.collection('users').doc(user.uid);
-       userRef.get().then((doc) => {
-         this.setState({sport: doc.data().sport});
-         this.setState({level: doc.data().level});
-         this.setState({seasD: doc.data().seasonD});
-         this.setState({seasM: doc.data().seasonM});
-         this.setState({seasY: doc.data().seasonY});
-         db.collection('programs').where('sport', '==', this.state.sport)
-         .get()
-         .then((qSnap) => {
-           qSnap.forEach((doc) => {
-             if (doc.data().level === this.state.level) {
-               this.setState({prog: doc.data().pid})
-               this.makeDate();
-               this.getWeek();
-
-             }
-           })
-         });
-       })
-
-    }
 
   render () {
 
@@ -130,10 +53,44 @@ class Program extends Component {
       days,
       today,
       weeksUntil,
-    } = this.state;
+    } = this.props;
+    console.log(this.props.days);
+    const dL = days.map((d,i) => {
+      if (d.wID != null) {
+      return (
+        <div>
+          <Card style={{width: '300px', alignItems: 'center'}} key={i}>
+              <CardTitle>
+                Day {i + 1}
+                {': '}
+                {d.wID}
+              </CardTitle>
+              <CardBody>
+                <Button onClick={() => this.setModalVisible(d.wID)}>
+                  View Workout
+                </Button>
+              </CardBody>
+
+
+          </Card>
+          <Modal
+            isOpen = {this.state.showPrev}
+            toggle={this.toggle}
+          >
+            <Preview wID = {this.state.wID} />
+            <Button onClick={() => {
+                this.setModalVisible(null);
+              }}>
+              Close Preview
+            </Button>
+          </Modal>
+        </div>
+      )}
+    })
 
     return(
-      <div>
+      <div style={{display:'flex', flexDirection: 'column',
+        alignItems:'center', justifyContent:'center'}}>
         <h1>Your Program</h1>
         <br/>
 
@@ -145,19 +102,20 @@ class Program extends Component {
         <br/>
         <p> Today's Date: {today}</p>
         <p>
-          This Week: <br/><br/>
-          Weeks Until Season: {weeksUntil} <br/>
+          <strong>This Week:</strong><br/>
+          {this.props.weeksUntil > 0 &&
+            <p>Weeks Until Season: {this.props.weeksUntil}</p>
+
+          }
+          {this.props.weeksUntil < 1 &&
+            <p>Weeks Until Season: In Season</p>
+          }
+
           Mesocycle: {meso} <br/>
           Week: {week}
         </p>
 
-        {days.map((d,i) => {
-          return (
-            <div>
-              Day {i+1} {': '} {d.wID}
-            </div>
-          )
-        })}
+        {dL}
 
       </div>
     )

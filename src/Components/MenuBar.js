@@ -11,6 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+import logo2 from './logo2.png';
 
 import LogOut from './AuthFlow/LogOut';
 
@@ -32,13 +33,15 @@ class MenuBar extends Component {
       return (
         <div>
           <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">Athlead</NavbarBrand>
+            <NavbarBrand href="/">
+              <img src={logo2} width='60' height='48'/>
+            </NavbarBrand>
+
+
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/ExerciseLibrary/">Exercise Library</NavLink>
-                </NavItem>
+
 
                 <UncontrolledDropdown nav inNavBar>
                   <DropdownToggle nav caret>
@@ -68,6 +71,10 @@ class MenuBar extends Component {
                   </DropdownMenu>
                 </UncontrolledDropdown>
 
+                <NavItem>
+                  <NavLink href="/ExerciseLibrary/">Exercise Library</NavLink>
+                </NavItem>
+                
                 <UncontrolledDropdown nav inNavBar>
                   <DropdownToggle nav caret>
                     Profile
@@ -79,12 +86,9 @@ class MenuBar extends Component {
                     <DropdownItem>
                       <NavLink href="/Settings/">Settings</NavLink>
                     </DropdownItem>
-                    <DropdownItem>
-                      <LogOut />
-
-                    </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
+                <LogOut/>
 
 
               </Nav>

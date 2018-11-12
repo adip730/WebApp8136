@@ -60,29 +60,33 @@ class LogIn extends Component {
       email === '';
 
     return (
-      <div>
+      <div style={{display:'flex', flexDirection: 'column',
+        alignItems:'center', justifyContent:'center'}}>
         <h1>Log In</h1>
+        <br/>
         <form onSubmit={this.onSubmit}>
           <input
             value={email}
             onChange={event => this.setState(byPropKey('email', event.target.value))}
             type="text"
             placeholder="Email Address"
-          />
+          /><br/>
           <input
             value={password}
             onChange={event => this.setState(byPropKey('password', event.target.value))}
             type="password"
             placeholder="Password"
-          />
+          /><br/>
           <button disabled={isInvalid} type="submit">
             Log In
           </button>
 
           { error && <p>{error.message}</p> }
         </form>
-        <li><Link to={routes.FORGOT_PASS}>Forgot your Password? Click here to recover it</Link></li>
-        <li><Link to={routes.REGISTER}>Don't have an account? Click here to Register</Link></li>
+        <br/>
+        <Link to={routes.FORGOT_PASS}>Forgot your Password? Click here to recover it</Link>
+        
+        <Link to={routes.REGISTER}>Don't have an account? Click here to Register</Link>
       </div>
 
     );
