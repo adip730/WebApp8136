@@ -97,11 +97,15 @@ class Program extends Component {
 
     var show;
     if(this.props.loaded) {
-      show = <div>
-
-      <div style={{display:'flex', flexDirection: 'column',
-        alignItems:'center', justifyContent:'center'}}>
+      show = <div style={{display:'flex', flexDirection: 'column', 
+      alignItems:'center', justifyContent:'center'}}>
         <h1>Your Program</h1>
+
+      <div style={{display:'flex', flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
+
+      <div style={{float: 'left', marginRight: '30px',
+        alignItems:'center', justifyContent:'center'}}>
+
         <br/>
 
         <div>
@@ -124,10 +128,12 @@ class Program extends Component {
           Mesocycle: {meso} <br/>
           Week: {week}
         </p>
-
+      </div>
+      <div style={{float: 'left'}}>
         {dL}
 
       </div>
+    </div>
     </div>
   } else {
     show = <Loading/>
