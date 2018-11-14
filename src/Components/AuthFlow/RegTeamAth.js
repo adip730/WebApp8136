@@ -51,10 +51,15 @@ class RegTeamAth extends Component {
           program: prog,
           type: 'team',
         }
+        return newUser;
+      }).then((newUser) => {
         db.collection('users').doc(id).set(newUser)
         .then(() => {
           console.log('check')
-        });
+        })/*.then(() => {
+          console.log('go to home')
+          this.props.history.push(routes.HOME);
+        });*/
       })
     });
   }
@@ -88,11 +93,12 @@ class RegTeamAth extends Component {
             });
             history.push(routes.HOME);
 
-          })
+          })/*.then(() => {
+            console.log('go to home')
+            history.push(routes.HOME);
+          })*/
           .catch(error => {
             this.setState(byPropKey('error', error));
-          }).then(() => {
-            //history.push(routes.HOME);
           });
 
       } else {

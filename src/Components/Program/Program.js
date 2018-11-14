@@ -4,6 +4,8 @@ import Preview from './../Workout/Preview';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Modal } from 'reactstrap';
 
+import Loading from './../Loading';
+
 class Program extends Component {
   constructor() {
      super();
@@ -11,6 +13,7 @@ class Program extends Component {
      this.state = {
        showPrev: false,
        wID: '',
+       loaded: false
        /*authUser: null,
        prog: '',
        sport: '',
@@ -27,6 +30,10 @@ class Program extends Component {
        weeksUntil: '',*/
      };
      this.toggle = this.toggle.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({loaded: !this.state.loaded});
   }
 
  toggle() {
@@ -88,7 +95,10 @@ class Program extends Component {
       )}
     })
 
-    return(
+    var show;
+    if(this.props.loaded) {
+      show = <div>
+
       <div style={{display:'flex', flexDirection: 'column',
         alignItems:'center', justifyContent:'center'}}>
         <h1>Your Program</h1>
@@ -118,7 +128,19 @@ class Program extends Component {
         {dL}
 
       </div>
-    )
+    </div>
+  } else {
+    show = <Loading/>
+  }
+
+  return (
+    <div>
+
+        {show}
+
+    </div>
+  )
+
   }
 }
 

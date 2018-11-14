@@ -26,35 +26,98 @@ export const setUpSession = (Component) => {
         thisWeek: {},
         days: [],
 
-        loaded: '',
+        loaded: false,
       };
 
+
+    }
+
+    componentWillMount() {
+      auth.onAuthStateChanged(authUser => {
+        authUser
+          ? this.setState({authUser})
+          : this.setState({authUser:null})
+      })
     }
 
 
     componentDidMount() {
+      this.setState({loaded: !true})
       auth.onAuthStateChanged(authUser => {
         authUser
-          ? this.runAsync(authUser)
-          : this.setState({ authUser: null });
+          ? this.checkRun(authUser, 50).then(() => this.runAsync(authUser))
+          : this.setState({
+            authUser: null,
+
+          name: '',
+          organization: '',
+          prog: '',
+          sport: '',
+          level: '',
+
+          today: '',
+          seasonStart: '',
+          weeksUntil: '',
+
+          meso: '',
+          week: '',
+          thisWeek: {},
+          days: [],
+
+          loaded: false, });
       });
+    }
+
+    checkRun(authUser, interval) {
+      var retryCount = 0;
+      var retryCountLimit = 100;
+      const userRef = db.collection('users').doc(authUser.uid);
+      var promise = new Promise((resolve, reject) => {
+        var timer = setInterval(function () {
+          userRef.get().then((doc) => {
+            if (doc.exists) {
+              console.log('yes')
+              clearInterval(timer);
+              resolve();
+              return;
+            } else {
+              console.log('waiting')
+            }
+          })
+          retryCount++;
+          if (retryCount >= retryCountLimit) {
+              clearInterval(timer);
+              reject("retry count exceeded");
+          }
+        }, interval);
+      });
+
+      return promise;
     }
 
     runAsync(authUser) {
       this.setState({authUser});
       var data = [];
+      console.log(authUser);
       const userRef = db.collection('users').doc(authUser.uid);
       userRef.get().then((doc) => {
-        this.setState({
-          seasonStart: doc.data().seasonStart,
-          name: doc.data().name,
-          organization: doc.data().organization,
-          sport: doc.data().sport,
-          level: doc.data().level,
-          prog: doc.data().program,
-        })
-        data.start = doc.data().seasonStart;
-        data.prog = doc.data().program;
+        if(doc.exists){
+          console.log('got it')
+          this.setState({
+            seasonStart: doc.data().seasonStart,
+            name: doc.data().name,
+            organization: doc.data().organization,
+            sport: doc.data().sport,
+            level: doc.data().level,
+            prog: doc.data().program,
+          })
+          data.start = doc.data().seasonStart;
+          data.prog = doc.data().program;
+
+        } else {
+          console.log('not yet')
+        }
+
       })
       .then(() => {
         data.today = this.calcToday()

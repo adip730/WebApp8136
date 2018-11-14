@@ -33,7 +33,7 @@ class MenuBar extends Component {
       return (
         <div>
           <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">
+            <NavbarBrand href="/home">
               <img src={logo2} width='60' height='48'/>
             </NavbarBrand>
 
@@ -74,7 +74,7 @@ class MenuBar extends Component {
                 <NavItem>
                   <NavLink href="/ExerciseLibrary/">Exercise Library</NavLink>
                 </NavItem>
-                
+
                 <UncontrolledDropdown nav inNavBar>
                   <DropdownToggle nav caret>
                     Profile

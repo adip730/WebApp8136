@@ -85,11 +85,11 @@ class RegIndAth extends Component {
         });
         history.push(routes.HOME);
 
-      })
+      })/*.then(() => {
+        history.push(routes.HOME);
+      })*/
       .catch(error => {
         this.setState(byPropKey('error', error));
-      }).then(() => {
-        //history.push(routes.HOME);
       });
 
       e.preventDefault();

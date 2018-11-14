@@ -30,9 +30,9 @@ class Home extends Component {
     const days = this.props.days;
     console.log(this.props.name)
     console.log(this.props.days)
-
-    return (
-      <div>
+    var show;
+    if(this.props.loaded) {
+      show = <div>
 
           <Jumbotron style={{display:'flex', flexDirection: 'column',
             alignItems:'center', justifyContent:'center', }}>
@@ -53,6 +53,16 @@ class Home extends Component {
               </NavItem>
             </Nav>
           </Jumbotron>
+
+      </div>
+    } else {
+      show = <Loading/>
+    }
+
+    return (
+      <div>
+
+          {show}
 
       </div>
     )

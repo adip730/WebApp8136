@@ -33,7 +33,9 @@ import * as routes from './routes';
 import {auth} from './firebase/firebase';
 
 class App extends Component {
-
+  state = {
+    loading: true
+  }
   render() {
       return (
 
