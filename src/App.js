@@ -63,7 +63,7 @@ class App extends Component {
           <Route path='/Entry' component={Entry}/>
           <Route path='/History' component={History}/>
           <Route path='/Profile' render={() => <Profile {...props}/>}/>
-          <Route path='/Settings' component={Settings}/>
+          <Route path='/Settings' render={() => <Settings {...props}/>}/>
           <Route path={routes.HOME} render={() => <Home {...props}/>}/>
           <Route exact path='/' render={() => <Home {...props}/>}/>
         </Switch>
