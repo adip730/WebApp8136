@@ -51,6 +51,8 @@ This is the first release of the application.
       - Run the command `git clone [Copied URL]`
   
 **Build instructions**
+  - Navigate to location of cloned repository/downloaded project in your command line/terminal
+  - Run the command `npm run build` to build the source code as an executable application
   
 **Installation of actual application**
   - Navigate to location of cloned repository/downloaded project in your command line/terminal
