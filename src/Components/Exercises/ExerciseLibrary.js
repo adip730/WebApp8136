@@ -120,6 +120,9 @@ class ExerciseLibrary extends Component {
         <div style={{
               width: "60%",
               marginLeft: "18%",
+              float: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
             }}
             className="block"
         >

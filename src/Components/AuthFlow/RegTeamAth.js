@@ -56,10 +56,7 @@ class RegTeamAth extends Component {
         db.collection('users').doc(id).set(newUser)
         .then(() => {
           console.log('check')
-        })/*.then(() => {
-          console.log('go to home')
-          this.props.history.push(routes.HOME);
-        });*/
+        })
       })
     });
   }

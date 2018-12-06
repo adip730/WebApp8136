@@ -35,7 +35,7 @@ class Home extends Component {
       show = <div>
 
           <Jumbotron style={{display:'flex', flexDirection: 'column',
-            alignItems:'center', justifyContent:'center', }}>
+            alignItems:'center', justifyContent:'center', backgroundColor: 'transparent'}}>
             <h3 className="display-3">Welcome {name} !</h3>
             <p className="lead">This is the Athlead Training App</p>
 

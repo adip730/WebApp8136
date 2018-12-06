@@ -95,6 +95,8 @@ export const setUpSession = (Component) => {
       return promise;
     }
 
+
+
     runAsync(authUser) {
       this.setState({authUser});
       var data = [];

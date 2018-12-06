@@ -32,7 +32,7 @@ class MenuBar extends Component {
     render() {
       return (
         <div>
-          <Navbar color="light" light expand="md">
+          <Navbar color="dark"  expand="md">
             <NavbarBrand href="/home">
               <img src={logo2} width='60' height='48'/>
             </NavbarBrand>
@@ -49,7 +49,7 @@ class MenuBar extends Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="/Workout/">Today's Workout</NavLink>
+                      <NavLink color='black' href="/Workout/">Today's Workout</NavLink>
                     </DropdownItem>
                     <DropdownItem>
                       <NavLink href="/Program/">Your Program</NavLink>

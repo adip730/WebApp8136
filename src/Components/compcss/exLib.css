@@ -1,15 +1,15 @@
 .ExDB {
-  float: inherit;
+  width: 937px;
+  float: center;
+  justify-content: center;
   text-align: center;
   margin-top: 10px;
-  margin-right: 50px;
-  margin-left: 50px;
+  
 }
 
 .exDisp {
   float: inherit;
   text-align: left;
-  margin-left: 20%;
   width: 60%;
 
 }
@@ -37,6 +37,7 @@
 
 .row {
     display: flex;
+    width: 937px;
 }
 
 .column {

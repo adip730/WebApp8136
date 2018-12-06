@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 //import './index.css';
+import './content.css';
 import Progress from "react-progress-2";
 
 import Landing from './Components/AuthFlow/Landing';
@@ -55,7 +56,7 @@ class App extends Component {
     <Router>
       <div>
         <MenuBar />
-
+        <div id='content'>
         <Switch>
           <Route path='/ExerciseLibrary' component={ExerciseLibrary}/>
           <Route path='/Workout' render={() => <Workout {...props}/>}/>
@@ -67,6 +68,7 @@ class App extends Component {
           <Route path={routes.HOME} render={() => <Home {...props}/>}/>
           <Route exact path='/' render={() => <Home {...props}/>}/>
         </Switch>
+        </div>
       </div>
     </Router>
 
