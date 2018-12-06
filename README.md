@@ -17,7 +17,7 @@
   - Can View Team Roster
 
 **Bug Fixes Made Since the Last Release:**
-This is the first release of the application.
+- This is the first release of the application.
   
 **Known Bugs and Defects:**
   - Profile page requires refresh after settings modification (name update)
@@ -31,13 +31,13 @@ This is the first release of the application.
   - Web browser: Internet Explorer 9 or greater, Microsoft Edge, Google Chrome v23 or greater, Mozilla Firefox v21 or greater, Safari v12 or greater
 
 **Dependent libraries that must be installed**
-  - Install the most recent version of Node.js from https://nodejs.org/en/download/
-  - Windows
-    - Download the Windows installer (.msi file) from the provided link
-    - Run the installer and follow prompts to complete installation
-   - MacOS
-    - Download the macOS installer (.pkg file) from the provided link
-    - Run the installer and follow prompts to complete installation
+- Install the most recent version of Node.js from https://nodejs.org/en/download/
+- Windows
+  - Download the Windows installer (.msi file) from the provided link
+  - Run the installer and follow prompts to complete installation
+- MacOS
+  - Download the macOS installer (.pkg file) from the provided link
+  - Run the installer and follow prompts to complete installation
     
 **Download instructions**
   - Project repository found at https://github.com/adip730/WebApp8136
