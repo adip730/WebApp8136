@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {auth,db} from './../../firebase/firebase';
+import { withRouter } from 'react-router-dom';
 
-export default class Settings extends Component {
+class Settings extends Component {
   constructor(props) {
     super(props);
 
@@ -9,6 +10,7 @@ export default class Settings extends Component {
       authUser: null,
       email: '',
       name: '',
+      submitted: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,9 +22,13 @@ export default class Settings extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const userRef = db.collection("users").doc(auth.currentUser.uid).update(
       "name", this.state.name,
-    );
+    ).then(() => {
+      this.props.history.push('/profile');
+    });
+
   }
 
   render() {
@@ -31,20 +37,34 @@ export default class Settings extends Component {
       name
     } = this.props;
 
+
     return (
       <div style={{display:'flex', flexDirection: 'column',
-        alignItems:'center', justifyContent:'center'}}>
+        alignItems:'center', justifyContent:'center', textAlign: 'center'}}>
         <div>
-          <h2>SETTINGS</h2> <br/>
+          <h2>Edit Profile Settings</h2> <br/>
 
-          <div>
+          <div style={{float: 'center',
+          justifyContent: 'center',
+          textAlign: 'center'}}>
             <form onSubmit={this.handleSubmit}>
               Name: <input type="text" name="name" placeholder={name} value={this.state.name} onChange={this.handleChange} /> <br/>
+              <br/>
               <input type="submit" value="Submit" />
             </form>
+            <br/>
+            <br/>
+
+            <div>
+              This is currently the only information you have authorization to change!
+            </div>
           </div>
         </div>
       </div>
     )
+
+
   }
 }
+
+export default withRouter(Settings);

@@ -32,39 +32,15 @@ export const setUpSession = (Component) => {
 
     }
 
-    componentWillMount() {
-      auth.onAuthStateChanged(authUser => {
-        authUser
-          ? this.setState({authUser})
-          : this.setState({authUser:null})
-      })
-    }
 
 
     componentDidMount() {
-      this.setState({loaded: !true})
       auth.onAuthStateChanged(authUser => {
         authUser
-          ? this.checkRun(authUser, 50).then(() => this.runAsync(authUser))
-          : this.setState({
-            authUser: null,
-
-          name: '',
-          organization: '',
-          prog: '',
-          sport: '',
-          level: '',
-
-          today: '',
-          seasonStart: '',
-          weeksUntil: '',
-
-          meso: '',
-          week: '',
-          thisWeek: {},
-          days: [],
-
-          loaded: false, });
+          ? (this.state.loaded == false
+            ? (this.checkRun(authUser, 50).then(() => this.runAsync(authUser)))
+            : this.setState({authUser}))
+          : this.reset()
       });
     }
 
@@ -76,12 +52,12 @@ export const setUpSession = (Component) => {
         var timer = setInterval(function () {
           userRef.get().then((doc) => {
             if (doc.exists) {
-              console.log('yes')
+              console.log('user document exists')
               clearInterval(timer);
               resolve();
               return;
             } else {
-              console.log('waiting')
+              console.log('waiting for document to be created')
             }
           })
           retryCount++;
@@ -130,9 +106,32 @@ export const setUpSession = (Component) => {
       .then(() => {
         this.getWeek(data.prog, data.weeksUntil);
       })
-      .then(() => {
-        this.setState({loaded: true});
+    }
+
+    reset() {
+      console.log('Resetting');
+      this.setState({
+        authUser: null,
+
+        name: '',
+        organization: '',
+        prog: '',
+        sport: '',
+        level: '',
+
+        today: '',
+        wkOf: '',
+        seasonStart: '',
+        weeksUntil: '',
+
+        meso: '',
+        week: '',
+        thisWeek: {},
+        days: [],
+
+        loaded: false
       })
+      console.log(this.state);
     }
 
     calcToday = () => {
@@ -208,6 +207,8 @@ export const setUpSession = (Component) => {
           days: thisW.days,
         });
         return thisW.days;
+      }).then(() => {
+        this.setState({loaded: true});
       })
 
     }

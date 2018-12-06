@@ -27,7 +27,7 @@ class LogOut extends Component {
 
       auth.signOut()
         .then(() => {
-          history.push(routes.LANDING);
+          history.push('/');
       });
 
   }
